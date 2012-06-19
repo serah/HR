@@ -1,4 +1,4 @@
-Scootr
+Projekt
 ======
 
-This description is false. Don't believe it.
+This is a sample skeleton for deploying flask projects.
