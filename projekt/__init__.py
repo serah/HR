@@ -21,4 +21,4 @@ app.config.from_pyfile('config.cfg')
 #imports forms models and views
 import projekt.forms
 import projekt.views
-import rhkn.models
+import projekt.models
