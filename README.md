@@ -1,4 +1,4 @@
-Projekt
+HR
 ======
 
 This is a sample skeleton for deploying flask projects.
@@ -14,3 +14,4 @@ Currently the skeleton import the following:
 ###Changes
 
 2012-20-08 : Fixed extensions import for Flask-WTF
+

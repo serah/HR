@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block foo %}
+<table class='table table-hover table-bordered'>
+<colgroup>
+<col class='span2' />
+<col class='span2' />
+<col class='span4' />
+<col class='span1' />
+<col class='span2' />
+<col class='span1' />
+</colgroup>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Headline</th>
+            <th>Verified</th>
+            <th>Interviewer</th>
+            <th>DOI</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>U567834656</td>
+            <td>Pronoy Chopra</td>
+            <td>B.Tech from Jaypee B.Tech from Jaypee</td>
+            <td>Yes</td>
+            <td>Blah blah</td>
+            <td>foo day</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
+

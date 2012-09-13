@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block js %}
+<script src="{{ url_for('static', filename='js/libs/bootstrap/tooltip.js') }} "></script>
+<script type='text/javascript'>
+$("#spec").tooltip({trigger:'focus', placement:'right'});
+$("#headline").tooltip({trigger:'focus', placement:'right'});
+</script>
+{% endblock %}
+{% block foo %}
+
+<form method="POST">
+<legend> Apply for a vacancy </legend>
+<input type= 'text' name='name' placeholder='Type your name here'/><br/>
+<input type= 'text' name='email' placeholder='Type your email id here'/><br/>
+<select name="day" class="span1">
+<option value="None">Day</option>
+{% for i in range(1,32) %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+<select name="month" class="span1">
+<option value="None">Month</option>
+{% for i in range(1,12) %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+<select name="year" class="span1">
+<option value="None">Year</option>
+{% for i in range(1960,currentyear +1 ) %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select><br />
+<input type= 'text' name='number' placeholder='Enter your number here'/><br/>
+<input type= 'text' name='opportunity' class='span6' placeholder='Enter the opportunity id of vacancy'/>
+<span class="help-block">separate the ids using comma</span><br/>
+<select name="Total experience">
+<option value="None">Select experience</option>
+<option value="fresher">Fresher</option>
+{% for i in range(0,31) %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+<option value="30+">30+</option>
+</select> Years <br/>
+<textarea id='spec' rel='tooltip' title='Example: Oracle, Java, Python, Marketing' name='expertise' class='span6'placeholder='Please enter your area of expertise/specialisation' ></textarea><br/>
+<input id='headline' rel='tooltip' title='Example: B.Tech,MBA with four years experience in FMCG' name='headline' class='span6' placeholder='Describe your professional background in one line' /><br/>
+<button type='submit' class="btn btn-success">Submit</button>
+</form>
+
+
+
+
+{% endblock %}
+
