@@ -8,7 +8,7 @@ from flask.ext.bcrypt import Bcrypt, generate_password_hash, \
 #from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
 from HR import app
-from HR.models import db_session, User, Applicant, Vacancies, Vacancy, Status
+from HR.models import User, Applicant, Vacancies, Vacancy, Status, session
 
 @app.teardown_request
 def shutdown_session(exception=None):

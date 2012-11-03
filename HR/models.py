@@ -1,14 +1,15 @@
 import sqlalchemy
 import ibm_db_sa.ibm_db_sa
 from sqlalchemy import *
-from sqlalchemy.orm import mapper, relation, scoped_session, sessionmaker
+from sqlalchemy.orm import mapper, relation, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-db2 = sqlalchemy.create_engine('ibm_db_sa://db2inst1:db2admin@localhost:50000/hr')
-db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False,
-                                         bind=db2))
+engine = sqlalchemy.create_engine('ibm_db_sa://db2inst1:db2admin@localhost:50000/hr')
+#db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False,
+#                                         bind=engine))
+
 Base = declarative_base()
-Base.query = db_session.query_property()
+#Base.query = db_session.query_property()
 
 class User(Base):
   __tablename__ = 'users'
@@ -24,6 +25,7 @@ class User(Base):
       self.password = password
 
 class Applicant(Base):
+  __bind_key__ = 'Applicant'
   __tablename__ = 'applicant'
   id = Column(Integer, primary_key=True)
   dob = Column(Date(), nullable=False)
@@ -32,7 +34,7 @@ class Applicant(Base):
   expertise = Column(String(500))
   header = Column(String(100),nullable=False)
   user_id = Column(Integer, ForeignKey('users.id'))
-  status = relation('Applicant',backref='status')
+  status = relation('Status',backref='applicant')
 
   def __init__(self, dob=None, number=None, experience=None, expertise=None,
                header=None):
@@ -48,7 +50,7 @@ class Vacancies(Base):
   date = Column(Date(), unique=True)
   position = Column(String(100))
   location = Column(String(100))
-  vacancy = relation('Vacancies',backref='vacancy')
+  vacancy = relation('Vacancy',backref='vacancies')
 
   def __init__(self, date=None, position=None, location=None):
       self.date = date
@@ -87,5 +89,8 @@ class Status(Base):
       self.location = location
 
 def init_db():
-  Base.metadata.create_all(bind=db2)
+  Base.metadata.create_all(bind=engine)
+
+db_session = sessionmaker(bind=engine, autoflush=True, transactional=True)
+session = db_session()
 
