@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block foo %}
+<table class='table table-hover table-bordered'>
+<colgroup>
+<col class='span1' />
+<col class='span2' />
+<col class='span5' />
+<col class='span3' />
+</colgroup>
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Date</th>
+            <th>Position</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>8/10/2012</td>
+            <td><a href="{{ url_for('position')}}">Level H Analyst</a></td>
+            <td>Banglore</td>
+        </tr>
+    </tbody>
+</table>
+<a href="{{ url_for('add_position')}}" class='btn btn-primary'>Add position</a>
+{% endblock %}
+

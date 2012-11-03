@@ -9,14 +9,47 @@
 <button type='submit' class="btn btn-success">Submit</button>
 </form>-->
 
+{% if hello %}
 <div class='hero-unit'>
-<h1>Hello,</h1>
-<p>Welcome to BT Consultants.</p>
-<a href="" class='btn btn-primary'>Know more</a> <a href="{{ url_for('vacancy') }}" class='btn'>Check for vacancies</a>
+<h2>BT Consultants</h2>
+<p>We are the leading consultant company when it comes to HR and Telecom industry</p>
+<a href="{{ url_for('about')}}" class='btn btn-primary'>Know more</a> <a href="{{ url_for('vacancy') }}" class='btn'>Check for vacancies</a>
+</div>
+{% elif about %}
+<div id="about" class='hero-unit'>
+<h2>BT Consultants<h2>
+<p>BT Consultants is an executive search firm manned by a team of young and energetic professionals well equipped to comprehend the specific requirements of its customers and provide the desired profiles within stipulated deadlines. Enriched by an expertise of over fifty man years in varied fields, the team is capable to handle pressures with the right degree of maturity. The management team has rich and diverse experience in the corporate world, having held several leadership positions across sales, marketing, strategy planning and business operations.</p>
+<p>Contemplating a focused approach, BT Consultants has concentrated its efforts to specific industries like Telecom, ISP, ITes, Retail and Managed Services. A strong data bank and an effective referral system for middle and senior management level positions has been its strength in the areas of Presales, Sales, Marketing, Solution Architects, Revenue Assurance, Customer Care and HR.</p>
+<p>BT Consultants enjoys a long term business relationship with its clients because of the high quality services it has provided to them. As a manpower recruitment consultant, our value added services can be summarized by the following facts.</p>
+<ul><small>
+<li>Apart from a detailed understanding of the desired profile, a sincere effort is made to understand the philosophy of the company before initiating the resume short listing process.</li>
+<li>Forwarding of only 3 to 5 profiles against any requirement, after proper screening and short listing.</li>
+<li>On an average, 70-80% of the profiles forwarded are found suitable and interviews conducted.</li>
+<li>Such a positive hit rate has been the essence of our long term mutually beneficial relationships with our clients.</li>
+</small></ul>
 </div>
 
-
-
+{% elif contact %}
+<div id = "contact" class='hero-unit'>
+<address>
+<strong>Contact</strong><br>
+BT Consultants<br>
+301 - GS Arcade<br>
+LSC, Pocket - B<br>
+Mayur Vihar - II<br>
+Delhi-110091<br>
+<br>
+<strong>Phone</strong><br>
+011-22777780/43052120<br>
+<br>
+<strong>Mobile</strong><br>
+9810925525<br>
+<br>
+<strong>email id</strong><br>
+bernard@btconsultants.in
+</address>
+</div>
+{% endif %}
 
 {% endblock %}
 

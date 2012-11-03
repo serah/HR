@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block foo %}
+<!--
+<form method="POST">
+<input type= 'text' name='username' placeholder='Type your username here'/><br/>
+<input type= 'text' name='email' placeholder='Type your email id here'/><br/>
+<input type= 'password' name='pwd' placeholder='Enter Password'/><br/>
+<button type='submit' class="btn btn-success">Submit</button>
+</form>-->
+
+<div class='hero-unit'>
+<h1>Hello,</h1>
+<p>Welcome to BT Consultants.</p>
+<a href="" class='btn btn-primary'>Know more</a> <a href="{{ url_for('vacancy') }}" class='btn'>Check for vacancies</a>
+</div>
+
+
+
+
+{% endblock %}
+
