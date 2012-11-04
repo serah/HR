@@ -8,6 +8,8 @@ from flask.ext.wtf import Form, TextField, TextAreaField, \
     PasswordField, SubmitField, Required, ValidationError
 from flask.ext.bcrypt import Bcrypt, generate_password_hash, \
 	check_password_hash
+from sqlalchemy import *
+from sqlalchemy.ext.declarative import declarative_base
 
 #define app
 app = Flask(__name__)

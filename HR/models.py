@@ -1,96 +1,64 @@
-import sqlalchemy
 import ibm_db_sa.ibm_db_sa
-from sqlalchemy import *
-from sqlalchemy.orm import mapper, relation, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+#from sqlalchemy.orm import sessionmaker
+from HR import create_engine, Column, String, Text, Integer
+from HR import declarative_base
 
-engine = sqlalchemy.create_engine('ibm_db_sa://db2inst1:db2admin@localhost:50000/hr')
-#db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False,
-#                                         bind=engine))
-
+engine = create_engine('ibm_db_sa://db2inst1:db2admin@localhost:50000/hr')
 Base = declarative_base()
-#Base.query = db_session.query_property()
 
-class User(Base):
+#db_session = sessionmaker(bind=engine, autoflush=True, transactional=True)
+#session = db_session()
+
+class users(Base):
+  """
+  User class is mapped with users table
+  """
+
   __tablename__ = 'users'
-  id = Column(Integer, primary_key=True)
-  name = Column(String(50), unique=True)
-  email = Column(String(120), unique=True)
-  password = Column(String(100),unique=True)
-  applicant = relation('Applicant',backref='user')
+  id = Column(Integer, autoincrement=True)
+  name = Column(String(50))
+  email = Column(String(100),primary_key=True,unique=True)
+  password = Column(Text)
+  dob = Column(Text)
+  expertise = Column(Text)
+  headline = Column(Text)
+  level = Column(Integer)
+  experience = Column(Text)
+  number = Column(Text)
 
-  def __init__(self, name=None, email=None, password=None):
-      self.name = name
-      self.email = email
-      self.password = password
+  def __init__(self, name, email, password, level, \
+ 	dob, expertise, headline, experience, number ):
+ 		self.name = name
+ 		self.email = email
+ 		self.password = password
+ 		self.level = level
+ 		self.dob = dob
+ 		self.expertise = expertise
+ 		self.headline = headline
+ 		self.experience = experience
+ 		self.number = number
 
-class Applicant(Base):
-  __bind_key__ = 'Applicant'
-  __tablename__ = 'applicant'
-  id = Column(Integer, primary_key=True)
-  dob = Column(Date(), nullable=False)
-  number = Column(Integer(20), unique=True)
-  experience = Column(String(100),nullable=False)
-  expertise = Column(String(500))
-  header = Column(String(100),nullable=False)
-  user_id = Column(Integer, ForeignKey('users.id'))
-  status = relation('Status',backref='applicant')
+class vacancy(Base):
+ 	"""
+ 	This is a table for creating vacancies
+ 	"""
+ 	__tablename__ = 'vacancy'
+ 	id = Column(String(100), primary_key=True)
+ 	name = Column(String(50))
+ 	department = Column(String(50))
+ 	description = Column(Text)
+ 	responsibilities = Column(Text)
+ 	experience = Column(String(50))
+ 	education = Column(Text)
+ 	location = Column(String(100))
 
-  def __init__(self, dob=None, number=None, experience=None, expertise=None,
-               header=None):
-      self.dob = dob
-      self.number = number
-      self.experience = experience
-      self.expertise = expertise
-      self.header = header
-
-class Vacancies(Base):
-  __tablename__ = 'vacancies'
-  id = Column(Integer, primary_key=True)
-  date = Column(Date(), unique=True)
-  position = Column(String(100))
-  location = Column(String(100))
-  vacancy = relation('Vacancy',backref='vacancies')
-
-  def __init__(self, date=None, position=None, location=None):
-      self.date = date
-      self.position = position
-      self.location = location
-
-class Vacancy(Base):
-  __bind_key__ = 'vacancy'
-  __tablename__ = 'vacancy'
-  id = Column(Integer, primary_key=True)
-  responsibilities = Column(String(1000))
-  description = Column(String(1000))
-  experience = Column(Integer(2))
-  education = Column(String(50))
-  industry = Column(String(50))
-  position_id = Column(Integer, ForeignKey('vacancies.id'))
-
-  def __init__(self, responsibilities=None, description=None, experience=None,
-               education=None, industry=None):
-      self.responsibilities = responsibilities
-      self.description = description
-      self.experience = education
-      self.industry = industry
-
-class Status(Base):
-  __bind_key__ = 'status'
-  __tablename__ = 'status'
-  id = Column(Integer, primary_key=True)
-  DOI = Column(Date())
-  approved = Column(Boolean)
-  applicant = Column(Integer, ForeignKey('applicant.id'))
-
-  def __init__(self, date=None, position=None, location=None):
-      self.date = date
-      self.position = position
-      self.location = location
+ 	def __init__(self, _id ,name, department, description):
+ 		self._id = _id
+ 		self.name = name
+ 		self.department = department
+ 		self.description = description
 
 def init_db():
+  """docstring for init_db"""
   Base.metadata.create_all(bind=engine)
-
-db_session = sessionmaker(bind=engine, autoflush=True, transactional=True)
-session = db_session()
 

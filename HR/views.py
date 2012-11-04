@@ -8,11 +8,11 @@ from flask.ext.bcrypt import Bcrypt, generate_password_hash, \
 #from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
 from HR import app
-from HR.models import User, Applicant, Vacancies, Vacancy, Status, session
+from HR.models import users,vacancy
 
-@app.teardown_request
-def shutdown_session(exception=None):
-    db_session.remove()
+#@app.teardown_request
+#def shutdown_session(exception=None):
+#    db_session.remove()
 
 @app.route('/')
 def hello():
@@ -69,7 +69,7 @@ def login(self):
     #insert into db
   return "foo"
 
-@app.route('/position')
+@app.route('/position',methods=["POST","GET"])
 def position():
   return render_template('position.html')
 
